@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-CSharp.csproj", "{60376337-F5CD-B2BD-0726-559C8AFADFAD}"
+EndProject
+Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-CSharp-Editor.csproj", "{0030F5A0-EF86-C8BB-60DE-6AC5E0B0FF3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60376337-F5CD-B2BD-0726-559C8AFADFAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60376337-F5CD-B2BD-0726-559C8AFADFAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60376337-F5CD-B2BD-0726-559C8AFADFAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60376337-F5CD-B2BD-0726-559C8AFADFAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0030F5A0-EF86-C8BB-60DE-6AC5E0B0FF3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0030F5A0-EF86-C8BB-60DE-6AC5E0B0FF3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0030F5A0-EF86-C8BB-60DE-6AC5E0B0FF3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0030F5A0-EF86-C8BB-60DE-6AC5E0B0FF3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

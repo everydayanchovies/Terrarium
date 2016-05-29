@@ -1,0 +1,21 @@
+﻿<Properties StartupItem="Assembly-UnityScript.unityproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/AssetStore/Wasabimole/ProceduralTree/ProceduralTree.cs">
+    <Files>
+      <File FileName="Assets/AssetStore/Wasabimole/ProceduralTree/ProceduralTree.cs" Line="170" Column="23" />
+      <File FileName="Assets/game/controller/TerrariumController.cs" Line="19" Column="10" />
+      <File FileName="Assets/game/controller/TreeController.cs" Line="28" Column="10" />
+      <File FileName="Assets/game/view/TreeView.cs" Line="72" Column="58" />
+      <File FileName="Assets/game/notifications/TreeNotifications.cs" Line="8" Column="52" />
+      <File FileName="Assets/game/TerrariumApplication.cs" Line="25" Column="3" />
+      <File FileName="Assets/game/notifications/Controller.cs" Line="3" Column="1" />
+      <File FileName="Assets/game/view/TerrariumView.cs" Line="6" Column="2" />
+      <File FileName="Assets/game/view/GameView/GameView.cs" Line="1" Column="1" />
+      <File FileName="Assets/game/model/TerrariumModel.cs" Line="6" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
