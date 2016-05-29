@@ -101,6 +101,8 @@ namespace Wasabimole.ProceduralTree
 		[Range (0f, 1f)] 
 		public float Progress = 0.5f;
 
+		public bool RenderTree = true;
+
 		// ---------------------------------------------------------------------------------------------------------------------------
         
 		float checksum;
@@ -146,14 +148,16 @@ namespace Wasabimole.ProceduralTree
 
 			gameObject.isStatic = true;
 
-			filter = gameObject.GetComponent<MeshFilter> ();
-			if (filter == null)
-				filter = gameObject.AddComponent<MeshFilter> ();
-			if (filter.sharedMesh != null)
-				checksum = checksumSerialized;
-			Renderer = gameObject.GetComponent<MeshRenderer> ();
-			if (Renderer == null)
-				Renderer = gameObject.AddComponent<MeshRenderer> ();
+			if (RenderTree) {
+				filter = gameObject.GetComponent<MeshFilter> ();
+				if (filter == null)
+					filter = gameObject.AddComponent<MeshFilter> ();
+				if (filter.sharedMesh != null)
+					checksum = checksumSerialized;
+				Renderer = gameObject.GetComponent<MeshRenderer> ();
+				if (Renderer == null)
+					Renderer = gameObject.AddComponent<MeshRenderer> ();
+			}
 		}
 
 		// ---------------------------------------------------------------------------------------------------------------------------
@@ -201,22 +205,24 @@ namespace Wasabimole.ProceduralTree
 
 		private void SetTreeMesh ()
 		{
-			// Get mesh or create one
-			var mesh = filter.sharedMesh;
-			if (mesh == null)
-				mesh = filter.sharedMesh = new Mesh ();
-			else
-				mesh.Clear ();
+			if (RenderTree) {
+				// Get mesh or create one
+				var mesh = filter.sharedMesh;
+				if (mesh == null)
+					mesh = filter.sharedMesh = new Mesh ();
+				else
+					mesh.Clear ();
 
-			// Assign vertex data
-			mesh.vertices = vertexList.ToArray ();
-			mesh.uv = uvList.ToArray ();
-			mesh.triangles = triangleList.ToArray ();
+				// Assign vertex data
+				mesh.vertices = vertexList.ToArray ();
+				mesh.uv = uvList.ToArray ();
+				mesh.triangles = triangleList.ToArray ();
 
-			// Update mesh
-			mesh.RecalculateNormals ();
-			mesh.RecalculateBounds ();
-			mesh.Optimize (); // Do not call this if we are going to change the mesh dynamically!
+				// Update mesh
+				mesh.RecalculateNormals ();
+				mesh.RecalculateBounds ();
+				mesh.Optimize (); // Do not call this if we are going to change the mesh dynamically!
+			}
 
 #if UNITY_EDITOR
 			MeshInfo = "Mesh has " + vertexList.Count + " vertices and " + triangleList.Count / 3 + " triangles";
@@ -356,7 +362,8 @@ namespace Wasabimole.ProceduralTree
 			                  RadiusStep + MinimumRadius + Twisting + BranchProbability + BranchRoundness + Progress;
 
 			// Return (do nothing) unless tree parameters change
-			if (newChecksum == checksum && filter.sharedMesh != null)
+			if (newChecksum == checksum &&
+			    (RenderTree && filter.sharedMesh != null))
 				return;
 
 			checksumSerialized = checksum = newChecksum;
@@ -364,7 +371,9 @@ namespace Wasabimole.ProceduralTree
 #if UNITY_EDITOR
 			if (!CanGetPrefabMesh ()) 
 #endif
-                GenerateTree (); // Update tree mesh
+			{
+				GenerateTree (); // Update tree mesh
+			}
 		}
 
 		// ---------------------------------------------------------------------------------------------------------------------------
@@ -374,8 +383,10 @@ namespace Wasabimole.ProceduralTree
 		#if UNITY_EDITOR
 		void OnDisable ()
 		{
-			if (filter.sharedMesh == null)
-				return; // If tree has a mesh
+			if (RenderTree) {
+				if (filter.sharedMesh == null)
+					return; // If tree has a mesh
+			}
 			if (PrefabUtility.GetPrefabType (this) == PrefabType.PrefabInstance) { // If it's a prefab instance, look for siblings
 				var parentPrefab = PrefabUtility.GetPrefabParent (this);
 				var list = (ProceduralTree[])FindObjectsOfType (typeof(ProceduralTree));
@@ -383,12 +394,19 @@ namespace Wasabimole.ProceduralTree
 					if (go != this && PrefabUtility.GetPrefabParent (go) == parentPrefab)
 						return; // Return if there's another prefab instance still using the mesh
 			}
-			DestroyImmediate (filter.sharedMesh, true); // Delete procedural mesh
+
+			if (RenderTree) {
+				DestroyImmediate (filter.sharedMesh, true); // Delete procedural mesh
+			}
 		}
 		#endif
 
 		public Material GetMaterial ()
 		{
+			if (!RenderTree) {
+				return null;
+			}
+
 			Renderer renderer = GetComponent<Renderer> ();
 			return renderer.material;
 		}

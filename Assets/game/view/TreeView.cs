@@ -11,6 +11,7 @@ public class TreeView : TerrariumElement
 
 	public ProceduralTree proceduralTree;
 	public ProceduralTree secondProceduralTree;
+	public ProgressView progressView;
 
 	private TreeController treeController;
 
@@ -19,7 +20,9 @@ public class TreeView : TerrariumElement
 	{
 		treeController = gameObject.AddComponent<TreeController> ();
 
-		proceduralTree.Seed = Random.Range(0, 65536);
+		proceduralTree.Seed = Random.Range (0, 65536);
+
+		twist = proceduralTree.Twisting;
 
 		secondProceduralTree.BaseRadius = proceduralTree.BaseRadius;
 		secondProceduralTree.BranchProbability = proceduralTree.BranchProbability;
@@ -39,11 +42,13 @@ public class TreeView : TerrariumElement
 
 	int dir = 1;
 
+	float twist;
+
 	// Update is called once per frame
 	void Update ()
 	{
-		if (proceduralTree.Twisting >= 7
-		    || proceduralTree.Twisting <= 2) {
+		if (proceduralTree.Twisting >= twist + 5
+			|| proceduralTree.Twisting <= twist - 5) {
 			dir *= -1;
 		} 
 
@@ -60,24 +65,32 @@ public class TreeView : TerrariumElement
 		}
 	}
 
+	public int SignificantNumBranches;
+
 	IEnumerator UpdateTreeWithDelay (float delay)
 	{
 		if (!treeController.isRematerializingTree) {
 			yield return new WaitForSeconds (delay);
 
-			if (secondProceduralTree.BranchCount >= proceduralTree.BranchCount) {
-				if (Mathf.Abs (secondProceduralTree.BranchCount - proceduralTree.BranchCount) >= 3) {
-					app.Notify (TreeNotification.TreeHasEvolved, this);
-				}
+			int changeInBranches = Mathf.Abs (secondProceduralTree.BranchCount - proceduralTree.BranchCount);
+			int changeInVertices = Mathf.Abs (secondProceduralTree.vertexList.Count - proceduralTree.vertexList.Count);
 
-				if (Mathf.Abs (secondProceduralTree.vertexList.Count - proceduralTree.vertexList.Count) > SignificantNumVertices) {
-					app.Notify (TreeNotification.TreeGrewSignificantly, this);
+			if (changeInBranches >= SignificantNumBranches) {
+				app.Notify (TreeNotification.TreeHasEvolved, this);
+			}
 
+			if (changeInVertices > SignificantNumVertices) {
+				app.Notify (TreeNotification.TreeGrewSignificantly, this);
+			}
+
+			//if (secondProceduralTree.BranchCount - proceduralTree.BranchCount < 10) {
+				if (changeInBranches >= SignificantNumBranches
+				    || changeInBranches >= SignificantNumBranches) {
 					treeController.RematerializeTree ();
 				} else {
 					GrowTree ();
 				}
-			}
+			//}
 		}
 	}
 
@@ -106,6 +119,8 @@ public class TreeView : TerrariumElement
 			newProgress = 1f;
 
 		secondProceduralTree.Progress = newProgress;
+
+		progressView.SetProgress (newProgress * 100);
 	}
 
 	private void PredictNextStep (float steps)

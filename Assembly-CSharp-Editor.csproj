@@ -48,18 +48,31 @@
      <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Editor\BloomProEditor.cs" />
      <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\Editor\ProceduralTreeEditor.cs" />
      <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\Editor\UpdateNotifications.cs" />
+     <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_CS.cs" />
+     <Compile Include="Assets\RAIN\Editor\ScriptTemplates\DecisionTemplate_CS.cs" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxProTap.shader" />
-     <None Include="Assets\BattleTransitions\TreeShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\AspectSphereShader.shader" />
+     <None Include="Assets\Resources\TreeShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Demo\Reflect-Glossy.shader" />
-     <None Include="Assets\Dreamscapes\info.txt" />
-     <None Include="Assets\Dreamscapes\update.txt" />
+     <None Include="Assets\AssetStore\Dreamscapes\info.txt" />
+     <None Include="Assets\AssetStore\Dreamscapes\update.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\VisualSensorLineShader.shader" />
+     <None Include="Assets\Resources\SSGIShader.shader" />
+     <None Include="Assets\Resources\frag_gi.cginc" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshContourShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\BloomPro.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\WaypointShader.shader" />
      <None Include="Assets\Resources\ScreenTransitionShader.shader" />
+     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\shaders\Glass Reflective.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\SeparableBlur.cginc" />
      <None Include="Assets\Resources\BattleTransitionShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\VisualSensorRingShader.shader" />
      <None Include="Assets\AssetStore\Wasabimole\ProceduralTree\Readme.txt" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxPro.shader" />
+     <None Include="Assets\RAIN\ReleaseNotes.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\AspectRingShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshColliderShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Demo\Skybox.shader" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -108,6 +121,18 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/opt/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINMetaformEditor">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINMetaformEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINMetaform">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAINMetaform.dll</HintPath>
+ </Reference>
+ <Reference Include="RAIN">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAIN.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINEditor">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

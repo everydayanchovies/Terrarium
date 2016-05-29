@@ -45,12 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AssetStore\BattleTransitions\SimpleBlit.cs" />
      <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\BloomHelper.cs" />
      <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\BloomPro.cs" />
      <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\RenderTextureManager.cs" />
      <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\ProceduralTree.cs" />
-     <Compile Include="Assets\BattleTransitions\SimpleBlit.cs" />
-     <Compile Include="Assets\Scripts\CustomImageEffect.cs" />
+     <Compile Include="Assets\SSGIEffect.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
      <Compile Include="Assets\Scripts\SparkParticles.cs" />
      <Compile Include="Assets\game\TerrariumApplication.cs" />
@@ -61,26 +61,46 @@
      <Compile Include="Assets\game\notifications\Controller.cs" />
      <Compile Include="Assets\game\notifications\TreeNotifications.cs" />
      <Compile Include="Assets\game\view\GameView\GameView.cs" />
+     <Compile Include="Assets\game\view\LSystemGenerator.cs" />
+     <Compile Include="Assets\game\view\ProgressView.cs" />
+     <Compile Include="Assets\game\view\SpinLogic.cs" />
      <Compile Include="Assets\game\view\TerrariumView.cs" />
      <Compile Include="Assets\game\view\TreeView.cs" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxProTap.shader" />
-     <None Include="Assets\BattleTransitions\TreeShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\AspectSphereShader.shader" />
+     <None Include="Assets\Resources\TreeShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Demo\Reflect-Glossy.shader" />
-     <None Include="Assets\Dreamscapes\info.txt" />
-     <None Include="Assets\Dreamscapes\update.txt" />
+     <None Include="Assets\AssetStore\Dreamscapes\info.txt" />
+     <None Include="Assets\AssetStore\Dreamscapes\update.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\VisualSensorLineShader.shader" />
+     <None Include="Assets\Resources\SSGIShader.shader" />
+     <None Include="Assets\Resources\frag_gi.cginc" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshContourShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\BloomPro.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\WaypointShader.shader" />
      <None Include="Assets\Resources\ScreenTransitionShader.shader" />
+     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\shaders\Glass Reflective.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\SeparableBlur.cginc" />
      <None Include="Assets\Resources\BattleTransitionShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\VisualSensorRingShader.shader" />
      <None Include="Assets\AssetStore\Wasabimole\ProceduralTree\Readme.txt" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxPro.shader" />
+     <None Include="Assets\RAIN\ReleaseNotes.txt" />
+     <None Include="Assets\RAIN\Editor\Shaders\AspectRingShader.shader" />
+     <None Include="Assets\RAIN\Editor\Shaders\NavMeshColliderShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Demo\Skybox.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINMetaform">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAINMetaform.dll</HintPath>
+ </Reference>
+ <Reference Include="RAIN">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAIN.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,8 @@ public class TreeController : TerrariumElement, Controller
 
 	IEnumerator RematerializeTreeIEnumerator ()
 	{
+		bool twistTree = true;
+
 		if (isRematerializingTree) {
 			return false;
 		}
@@ -70,11 +72,28 @@ public class TreeController : TerrariumElement, Controller
 
 		material.SetFloat ("_Cutoff", 1f);
 
+		int twist = (int)proceduralTree.Twisting;
+		int twistAmount = 150;
+
+		if (twistTree) {
+			for (int i = twist; i < twistAmount - twist; i++) {
+				proceduralTree.Twisting = i;
+				yield return new WaitForSeconds (0.00001f);
+			}
+		}
+
 		yield return new WaitForSeconds (0.8f);
 
 		treeView.GrowTree ();
 		//treeView.EvolveTree (1);
 		//yield return new WaitForSeconds (0.9f);
+
+		if (twistTree) {
+			for (int i = twist; i < twistAmount - twist; i++) {
+				proceduralTree.Twisting = twistAmount - i;
+				yield return new WaitForSeconds (0.00001f);
+			}
+		}
 
 		for (int i = 1; i < 100 / speed; i++) {
 			material.SetFloat ("_Cutoff", (100 - i * speed) / 100f);
