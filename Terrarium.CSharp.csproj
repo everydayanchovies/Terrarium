@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.5f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -60,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -82,7 +74,6 @@
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\BloomPro.cs" />
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\RenderTextureManager.cs" />
     <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\ProceduralTree.cs" />
-    <Compile Include="Assets\game\view\soil\CameraView.cs" />
     <Compile Include="Assets\Scripts\SpinLogic.cs" />
     <Compile Include="Assets\game\Controller.cs" />
     <Compile Include="Assets\game\TerrariumApplication.cs" />
@@ -95,8 +86,11 @@
     <Compile Include="Assets\game\view\ProgressView.cs" />
     <Compile Include="Assets\game\view\TerrariumView.cs" />
     <Compile Include="Assets\game\view\overview\CameraView.cs" />
+    <Compile Include="Assets\game\view\overview\EarthDebrisView.cs" />
+    <Compile Include="Assets\game\view\overview\EarthView.cs" />
     <Compile Include="Assets\game\view\overview\GameView.cs" />
     <Compile Include="Assets\game\view\overview\TreeView.cs" />
+    <Compile Include="Assets\game\view\soil\CameraView.cs" />
     <Compile Include="Assets\game\view\soil\TreeView.cs" />
   </ItemGroup>
   <ItemGroup>
