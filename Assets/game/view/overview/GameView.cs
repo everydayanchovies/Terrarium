@@ -1,63 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.game.controller;
+using Assets.game.notifications;
+using Assets.Scripts.GameDB;
+using Assets.Scripts.GameDB.DataModel;
+using Tree = Assets.Scripts.GameDB.DataModel.Tree;
 
 public class GameView : TerrariumElement
 {
-	public int cameraPanSideOffset;
-	public Camera camera;
+    private Terrarium terrarium;
+    private Tree tree;
 
-	private Vector3 targetCameraPosition;
+    public Tree Tree
+    {
+        get { return tree; }
+        set
+        {
+            tree = value;
+            terrarium.Tree = tree;
+        }
+    }
 
-	void Start ()
-	{
-		camera = Camera.main;
-	}
+    void Start()
+    {
+        gameObject.AddComponent<GameController>();
 
-	void Update ()
-	{
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			app.Notify (TerrariumNotification.LeftKeyPressed, this);
-		
-			ResetCameraPosition ();
-			targetCameraPosition.x = -cameraPanSideOffset;
-		}
+        //tree=new Tree();
+        terrarium = new Terrarium(tree, 0xFFFFFF, 0x000000);
+    }
 
-		if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			ResetCameraPosition ();
-			targetCameraPosition.x = cameraPanSideOffset;
-		}
+    void Update()
+    {
 
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			ResetCameraPosition ();
-			targetCameraPosition.y = 6;
-		}
+    }
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			ResetCameraPosition ();
-			targetCameraPosition.z = -5;
-		}
+    public void SaveTerrarium()
+    {
+        DBHelper.SaveTerrarium(terrarium, 0);
+    }
 
-		if (!(Input.GetKey (KeyCode.LeftArrow)
-		    || Input.GetKey (KeyCode.RightArrow)
-			|| Input.GetKey (KeyCode.UpArrow)
-			|| Input.GetKey (KeyCode.DownArrow)
-			|| Input.GetKey (KeyCode.Space))) {
+    public bool LoadTerrarium(int id)
+    {
+        Terrarium ter = DBHelper.GetTerrarium(id);
 
-			ResetCameraPosition ();
-		}
-        
-		if (Vector3.Distance (camera.transform.position, targetCameraPosition) > 0.3f) {
-			camera.transform.position =
-				Vector3.Lerp (camera.transform.position,
-				targetCameraPosition,
-				Time.deltaTime * 3);
-		}
-	}
+        if (ter == null)
+        {
+            return false;
+        }
 
-	private void ResetCameraPosition ()
-	{
-		targetCameraPosition = Vector3.zero;
-		targetCameraPosition.y = 3;
-		targetCameraPosition.z = -10;
-	}
+        terrarium = ter;
+
+        app.Notify(GameNotification.TerrariumLoaded, this, ter);
+
+        return true;
+    }
 }

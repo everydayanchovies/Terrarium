@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using Tree = Assets.Scripts.GameDB.DataModel.Tree;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -410,5 +410,21 @@ namespace Wasabimole.ProceduralTree
 			Renderer renderer = GetComponent<Renderer> ();
 			return renderer.material;
 		}
+
+	    public void SetValues(Tree tree)
+	    {
+	        Seed = tree.Seed;
+            MaxNumVertices = tree.MaxNumVertices;
+            NumberOfSides = tree.NumberOfSides;
+            BaseRadius = tree.BaseRadius;
+            RadiusStep = tree.RadiusStep;
+            MinimumRadius = tree.MinimumRadius;
+            BranchRoundness = tree.BranchRoundness;
+            SegmentLength = tree.SegmentLength;
+            Twisting = tree.Twisting;
+            BranchProbability = tree.BranchProbability;
+
+            Update();
+        }
 	}
 }

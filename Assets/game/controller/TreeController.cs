@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.game.notifications;
 using Assets.game.view.overview;
+using Assets.Scripts.GameDB.DataModel;
 
 // Controls the app workflow.
 using Wasabimole.ProceduralTree;
@@ -8,101 +10,121 @@ using Wasabimole.ProceduralTree;
 
 public class TreeController : TerrariumElement, Controller
 {
-	void Start ()
-	{
-		app.RegisterController (this);
-	}
+    void Start()
+    {
+        app.RegisterController(this);
+    }
 
-	// Handles the ball hit event
-	void Controller.OnNotification (string p_event_path, Object p_target, params object[] p_data)
-	{
-		switch (p_event_path) {
-		case TreeNotification.TreeGrewSignificantly:
-			Debug.Log ("Tree grew significantly!");
-			//StartCoroutine (FlashScreen ());
-			//StartCoroutine (RematerializeTree ());
-			break;
-		case TreeNotification.TreeHasEvolved:
-			Debug.LogWarning ("Tree has evolved!");
-			//StartCoroutine (FlashScreen ());
-			//StartCoroutine (RematerializeTree ());
-			break;
-		}
-	}
+    // Handles the ball hit event
+    void Controller.OnNotification(string p_event_path, Object p_target, params object[] p_data)
+    {
+        switch (p_event_path)
+        {
 
-	IEnumerator FlashScreen ()
-	{
-		SimpleBlit simpleBlit = Camera.main.GetComponent<SimpleBlit> ();
-		Material material = simpleBlit.TransitionMaterial;
+            case TreeNotification.TreeGrewSignificantly:
+                Debug.Log("Tree grew significantly!");
+                //StartCoroutine (FlashScreen ());
+                //StartCoroutine (RematerializeTree ());
+                break;
 
-		float value = 1;
-		for (int i = 0; i < 5; i++) {
-			value = 1 - value;
-			material.SetFloat ("_Fade", value);
-			yield return new WaitForSeconds (0.3f);
-		}
-	}
+            case TreeNotification.TreeHasEvolved:
+                Debug.LogWarning("Tree has evolved!");
+                //StartCoroutine (FlashScreen ());
+                //StartCoroutine (RematerializeTree ());
+                break;
 
-	public void RematerializeTree ()
-	{
-		StartCoroutine (RematerializeTreeIEnumerator ());
-	}
+            case GameNotification.TerrariumLoaded:
+                Terrarium terrarium = (Terrarium)p_data[0];
 
-	public bool isRematerializingTree = false;
+                TreeView treeView = GetComponent<TreeView>();
 
-	IEnumerator RematerializeTreeIEnumerator ()
-	{
-		bool twistTree = true;
+                treeView.proceduralTree.SetValues(terrarium.Tree);
+                treeView.secondProceduralTree.SetValues(terrarium.Tree);
+                break;
+        }
+    }
 
-		if (isRematerializingTree) {
-			return false;
-		}
+    IEnumerator FlashScreen()
+    {
+        SimpleBlit simpleBlit = Camera.main.GetComponent<SimpleBlit>();
+        Material material = simpleBlit.TransitionMaterial;
 
-		isRematerializingTree = true;
+        float value = 1;
+        for (int i = 0; i < 5; i++)
+        {
+            value = 1 - value;
+            material.SetFloat("_Fade", value);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
 
-		TreeView treeView = GetComponent<TreeView> ();
-		ProceduralTree proceduralTree = GetComponentInChildren<ProceduralTree> ();
-		Material material = proceduralTree.GetMaterial ();
+    public void RematerializeTree()
+    {
+        StartCoroutine(RematerializeTreeIEnumerator());
+    }
 
-		int speed = 3;
+    public bool isRematerializingTree = false;
 
-		for (int i = 1; i < 80 / speed; i++) {
-			material.SetFloat ("_Cutoff", i * speed / 100f);
-			yield return new WaitForSeconds (0.0001f);
-		}
+    IEnumerator RematerializeTreeIEnumerator()
+    {
+        bool twistTree = true;
 
-		material.SetFloat ("_Cutoff", 1f);
+        if (isRematerializingTree)
+        {
+            return false;
+        }
 
-		int twist = (int)proceduralTree.Twisting;
-		int twistAmount = 150;
+        isRematerializingTree = true;
 
-		if (twistTree) {
-			for (int i = twist; i < twistAmount - twist; i++) {
-				proceduralTree.Twisting = i;
-				yield return new WaitForSeconds (0.00001f);
-			}
-		}
+        TreeView treeView = GetComponent<TreeView>();
+        ProceduralTree proceduralTree = GetComponentInChildren<ProceduralTree>();
+        Material material = proceduralTree.GetMaterial();
 
-		yield return new WaitForSeconds (0.8f);
+        int speed = 3;
 
-		treeView.GrowTree ();
-		//treeView.EvolveTree (1);
-		//yield return new WaitForSeconds (0.9f);
+        for (int i = 1; i < 80 / speed; i++)
+        {
+            material.SetFloat("_Cutoff", i * speed / 100f);
+            yield return new WaitForSeconds(0.0001f);
+        }
 
-		if (twistTree) {
-			for (int i = twist; i < twistAmount - twist; i++) {
-				proceduralTree.Twisting = twistAmount - i;
-				yield return new WaitForSeconds (0.00001f);
-			}
-		}
+        material.SetFloat("_Cutoff", 1f);
 
-		for (int i = 1; i < 100 / speed; i++) {
-			material.SetFloat ("_Cutoff", (100 - i * speed) / 100f);
-			yield return new WaitForSeconds (0.0001f);
-		}
+        int twist = (int)proceduralTree.Twisting;
+        int twistAmount = 150;
 
-		material.SetFloat ("_Cutoff", 0f);
+        if (twistTree)
+        {
+            for (int i = twist; i < twistAmount - twist; i++)
+            {
+                proceduralTree.Twisting = i;
+                yield return new WaitForSeconds(0.00001f);
+            }
+        }
 
-		isRematerializingTree = false;
-	}
+        yield return new WaitForSeconds(0.8f);
+
+        treeView.GrowTree();
+        //treeView.EvolveTree (1);
+        //yield return new WaitForSeconds (0.9f);
+
+        if (twistTree)
+        {
+            for (int i = twist; i < twistAmount - twist; i++)
+            {
+                proceduralTree.Twisting = twistAmount - i;
+                yield return new WaitForSeconds(0.00001f);
+            }
+        }
+
+        for (int i = 1; i < 100 / speed; i++)
+        {
+            material.SetFloat("_Cutoff", (100 - i * speed) / 100f);
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        material.SetFloat("_Cutoff", 0f);
+
+        isRematerializingTree = false;
+    }
 }

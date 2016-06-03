@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Wasabimole.ProceduralTree;
+using Tree = Assets.Scripts.GameDB.DataModel.Tree;
 
 namespace Assets.game.view.overview
 {
@@ -15,12 +16,16 @@ namespace Assets.game.view.overview
         public ProgressView progressView;
         public float TwistAmount;
 
+        private Tree tree;
         private TreeController treeController;
+        private GameView gameView;
 
         // Use this for initialization
         void Start()
         {
             treeController = gameObject.AddComponent<TreeController>();
+
+            gameView = GetComponentInParent<GameView>();
 
             proceduralTree.Seed = Random.Range(0, 65536);
 
@@ -40,6 +45,21 @@ namespace Assets.game.view.overview
                 secondProceduralTree.Twisting = proceduralTree.Twisting;
                 secondProceduralTree.Progress = proceduralTree.Progress;
             }
+
+            tree = new Tree(proceduralTree.Seed, proceduralTree.MaxNumVertices, proceduralTree.NumberOfSides, proceduralTree.BaseRadius,
+                proceduralTree.RadiusStep, proceduralTree.MinimumRadius, proceduralTree.BranchRoundness, proceduralTree.SegmentLength, proceduralTree.Twisting,
+                proceduralTree.BranchProbability);
+
+            gameView.Tree = tree;
+
+            StartCoroutine(d());
+        }
+
+        IEnumerator d()
+        {
+            yield return new WaitForSeconds(2);
+            gameView.LoadTerrarium(0);
+
         }
 
         float interval = 2f;
