@@ -7,7 +7,7 @@ Nearly done:
  - mvc back end.
  
 # Currently working on:
-A cross section of the earth, so that you can take care of the tree's roots.
+A cross section of the earth, so that you could take care of the tree's roots.
 
 # Show off zone
 The procedurally generated tree in action:
