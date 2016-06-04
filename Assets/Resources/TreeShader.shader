@@ -69,7 +69,7 @@
 					float3 normalDirection = normalize(mul(float4(v.normal, 0.0), modelMatrixInverse).xyz);
 					//float3 lightDirection = normalize(float3(_WorldSpaceLightPos0));
 					float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
-					float3 diffuseReflection = float3(_LightColor0.xyz) * max(0.0, dot(normalDirection, lightDirection));
+					float3 diffuseReflection = float3(_LightColor0.xyz) * max(0.0, dot(normalDirection, lightDirection) * 5);
 
 
 					o.col = float4(diffuseReflection, 1.0) + UNITY_LIGHTMODEL_AMBIENT;

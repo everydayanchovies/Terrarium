@@ -35,7 +35,7 @@ namespace Assets.game.view.catalogueview
 
             PlaceTrees();
 
-            model.TreesContainer.transform.localPosition = new Vector3(-x - 1, 1.5f, -y * 2 - 1);
+            model.TreesContainer.transform.localPosition = new Vector3(-x - 1, 0.5f, -y - 1);
         }
 
         private void PlaceTrees()
@@ -66,7 +66,7 @@ namespace Assets.game.view.catalogueview
                     tree.BranchRoundness = treeProperties.BranchRoundness;
                     tree.MaxNumVertices = treeProperties.MaxNumVertices;
                     tree.NumberOfSides = treeProperties.NumberOfSides;
-                    tree.Progress = Random.Range(0.3f, 1f);
+                    tree.Progress = Random.Range(0.7f, 1f);
 
                     trees[x][y] = tree;
                 }
