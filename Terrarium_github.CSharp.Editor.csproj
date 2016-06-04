@@ -91,6 +91,30 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.EditorTestsRunner">
+      <HintPath>Library\UnityAssemblies\UnityEditor.EditorTestsRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\UnityAssemblies\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TreeEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="RAIN">
       <HintPath>Assets\RAIN\RAIN.dll</HintPath>
     </Reference>
@@ -112,10 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Editor\BloomProEditor.cs" />
-    <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\Editor\ProceduralTreeEditor.cs" />
-    <Compile Include="Assets\AssetStore\Wasabimole\ProceduralTree\Editor\UpdateNotifications.cs" />
     <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_CS.cs" />
     <Compile Include="Assets\RAIN\Editor\ScriptTemplates\DecisionTemplate_CS.cs" />
+    <Compile Include="Assets\Scripts\ProceduralTree\Editor\ProceduralTreeEditor.cs" />
+    <Compile Include="Assets\Scripts\ProceduralTree\Editor\UpdateNotifications.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStore\Dreamscapes\info.txt" />
@@ -126,7 +150,6 @@
     <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxPro.shader" />
     <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\FxProTap.shader" />
     <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\SeparableBlur.cginc" />
-    <None Include="Assets\AssetStore\Wasabimole\ProceduralTree\Readme.txt" />
     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
     <None Include="Assets\RAIN\Editor\Shaders\AspectRingShader.shader" />
     <None Include="Assets\RAIN\Editor\Shaders\AspectSphereShader.shader" />
@@ -138,6 +161,7 @@
     <None Include="Assets\RAIN\ReleaseNotes.txt" />
     <None Include="Assets\Resources\BattleTransitionShader.shader" />
     <None Include="Assets\Resources\TreeShader.shader" />
+    <None Include="Assets\Scripts\ProceduralTree\Readme.txt" />
     <None Include="Assets\shaders\Glass Reflective.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

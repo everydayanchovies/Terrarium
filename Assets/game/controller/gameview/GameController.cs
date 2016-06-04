@@ -9,15 +9,9 @@ using Object = UnityEngine.Object;
 
 namespace Assets.game.controller
 {
-    public class GameController : TerrariumElement, Controller
+    public class GameController : TerrariumController
     {
-        void Start()
-        {
-            app.RegisterController(this);
-        }
-
-        // Handles the ball hit event
-        void Controller.OnNotification(string p_event_path, Object p_target, params object[] p_data)
+        public override void OnNotification(string p_event_path, Object p_target, params object[] p_data)
         {
             switch (p_event_path)
             {

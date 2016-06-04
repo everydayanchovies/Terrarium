@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Assets.game;
 
-public class EarthView : MonoBehaviour
+public class EarthView : TerrariumView
 {
     public Vector3 Offset;
     public float Radius;

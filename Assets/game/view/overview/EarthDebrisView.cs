@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Assets.game.view.overview
 {
-    class EarthDebrisView : TerrariumElement
+    class EarthDebrisView : TerrariumView
     {
         public GameObject[] Prefabs;
         public int[] PrefabsSpawnCount;

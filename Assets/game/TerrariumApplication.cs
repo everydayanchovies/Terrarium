@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 // Base class for all elements in this application.
 using System.Collections.Generic;
+using Assets.game;
+using Object = UnityEngine.Object;
 
 
 public class TerrariumElement : MonoBehaviour
@@ -15,9 +18,11 @@ public class TerrariumElement : MonoBehaviour
 public class TerrariumApplication : MonoBehaviour
 {
     // Reference to the root instances of the MVC.
-    public TerrariumModel model;
+    public TerrariumModel Model;
+    public TerrariumView View;
+    public TerrariumController Controller;
 
-    public IList<Controller> controllerList;
+    public IList<TerrariumController> controllerList;
 
     // Init things here
     void Start()
@@ -41,17 +46,17 @@ public class TerrariumApplication : MonoBehaviour
             return;
         }
 
-        foreach (Controller c in controllerList)
+        foreach (TerrariumController c in controllerList)
         {
             c.OnNotification(p_event_path, p_target, p_data);
         }
     }
 
-    public void RegisterController(Controller controller)
+    public void RegisterController(TerrariumController controller)
     {
         if (controllerList == null)
         {
-            controllerList = new List<Controller>();
+            controllerList = new List<TerrariumController>();
         }
 
         if (controllerList.Contains(controller))
@@ -62,5 +67,20 @@ public class TerrariumApplication : MonoBehaviour
         controllerList.Add(controller);
 
         Debug.Log("New controller registered: " + controller.GetType().Name);
+    }
+
+    public T GetModel<T>()
+    {
+        return (T)Convert.ChangeType(Model, typeof(T));
+    }
+
+    public T GetView<T>()
+    {
+        return (T)Convert.ChangeType(View, typeof(T));
+    }
+
+    public T GetController<T>()
+    {
+        return (T)Convert.ChangeType(Controller, typeof(T));
     }
 }

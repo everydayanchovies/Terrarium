@@ -2,11 +2,12 @@
 using System.Collections;
 using Assets.game.controller;
 using Assets.game.notifications;
+using Assets.game;
 using Assets.Scripts.GameDB;
 using Assets.Scripts.GameDB.DataModel;
 using Tree = Assets.Scripts.GameDB.DataModel.Tree;
 
-public class GameView : TerrariumElement
+public class GameView : TerrariumView
 {
     private Terrarium terrarium;
     private Tree tree;
@@ -23,8 +24,6 @@ public class GameView : TerrariumElement
 
     void Start()
     {
-        gameObject.AddComponent<GameController>();
-
         //tree=new Tree();
         terrarium = new Terrarium(tree, 0xFFFFFF, 0x000000);
     }

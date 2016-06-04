@@ -8,6 +8,19 @@ namespace Assets.Scripts.GameDB.DataModel
     [Serializable]
     public class Tree
     {
+        /// <summary>
+        /// Contains properties of a tree.
+        /// </summary>
+        /// <param name="seed">Random seed on which the generation is based</param>
+        /// <param name="maxNumVertices">Maximum number of vertices for the tree mesh (1024, 65000)</param>
+        /// <param name="numberOfSides">Number of sides for tree (3, 32)</param>
+        /// <param name="baseRadius">Base radius in meters (0.25f, 4f)</param>
+        /// <param name="radiusStep">Controls how quickly radius decreases (0.75f, 0.95f)</param>
+        /// <param name="minRadius">Minimum radius for the tree's smallest branches (0.01f, 0.2f)</param>
+        /// <param name="branchRoundness">Controls how round branches are (0f, 1f)</param>
+        /// <param name="segmentLength">Length of branch segments (0.01f, 0.5f)</param>
+        /// <param name="twisting">How much branches twist (0f, 40f)</param>
+        /// <param name="branchProbability">Branch probability (0f, 1f)</param>
         public Tree(int seed, int maxNumVertices, int numberOfSides, float baseRadius, float radiusStep,
             float minRadius, float branchRoundness, float segmentLength, float twisting, float branchProbability)
         {

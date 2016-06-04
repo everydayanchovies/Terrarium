@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.game.view.overview
 {
-    class CameraView : TerrariumElement
+    class CameraView : TerrariumView
     {
         public Vector3 OverviewDefaultPosition;
         public bool OverviewIsOrthographic;

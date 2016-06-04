@@ -5,7 +5,7 @@ using Tree = Assets.Scripts.GameDB.DataModel.Tree;
 
 namespace Assets.game.view.overview
 {
-    public class TreeView : TerrariumElement
+    public class TreeView : TerrariumView
     {
         // Num of vertices considered significant to tree growth
         [Range(32, 1024)]

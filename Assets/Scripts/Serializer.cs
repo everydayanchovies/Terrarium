@@ -32,6 +32,7 @@ namespace Assets.Scripts
 
         public static void Save<T>(string filename, T data) where T : class
         {
+            filename = "SaveData/" + filename;
             using (Stream stream = File.OpenWrite(filename))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
