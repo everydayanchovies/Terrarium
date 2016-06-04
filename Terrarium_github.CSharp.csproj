@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.5f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -86,6 +88,8 @@
     <Compile Include="Assets\Scripts\ProceduralTree\ProceduralTree.cs" />
     <Compile Include="Assets\Scripts\Serializer.cs" />
     <Compile Include="Assets\Scripts\SpinLogic.cs" />
+    <Compile Include="Assets\Scripts\TimeShiftStone\Dragger.cs" />
+    <Compile Include="Assets\Scripts\TimeShiftStone\GroundTexturizer.cs" />
     <Compile Include="Assets\TerrariumApplicationEditor.cs" />
     <Compile Include="Assets\game\TerrariumApplication.cs" />
     <Compile Include="Assets\game\TerrariumController.cs" />
@@ -135,6 +139,7 @@
     <None Include="Assets\Resources\TreeShader.shader" />
     <None Include="Assets\Scripts\ProceduralTree\Readme.txt" />
     <None Include="Assets\shaders\Glass Reflective.shader" />
+    <None Include="Assets\shaders\Radial Texturer.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
