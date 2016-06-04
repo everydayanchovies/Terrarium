@@ -46,23 +46,16 @@ namespace Assets.game.view.overview
                 secondProceduralTree.Progress = proceduralTree.Progress;
             }
 
-            tree = new Tree(proceduralTree.Seed, proceduralTree.MaxNumVertices, proceduralTree.NumberOfSides, proceduralTree.BaseRadius,
-                proceduralTree.RadiusStep, proceduralTree.MinimumRadius, proceduralTree.BranchRoundness, proceduralTree.SegmentLength, proceduralTree.Twisting,
-                proceduralTree.BranchProbability);
+//            tree = new Tree(proceduralTree.Seed, proceduralTree.MaxNumVertices, proceduralTree.NumberOfSides, proceduralTree.BaseRadius,
+//                proceduralTree.RadiusStep, proceduralTree.MinimumRadius, proceduralTree.BranchRoundness, proceduralTree.SegmentLength, proceduralTree.Twisting,
+//                proceduralTree.BranchProbability);
+//
+//            gameView.Tree = tree;
 
-            gameView.Tree = tree;
-
-            StartCoroutine(d());
+            proceduralTree.enabled = false;
         }
 
-        IEnumerator d()
-        {
-            yield return new WaitForSeconds(2);
-            gameView.LoadTerrarium(0);
-
-        }
-
-        float interval = 2f;
+        float interval = 0.2f;
         float nextTime = 0;
 
         int dir = 1;
@@ -81,7 +74,7 @@ namespace Assets.game.view.overview
             {
                 if (!treeController.isRematerializingTree)
                 {
-                    GrowSecondTree(5);
+                    GrowSecondTree(5*5);
 
                     StartCoroutine(UpdateTreeWithDelay(1f));
 
@@ -185,6 +178,11 @@ namespace Assets.game.view.overview
         public void GrowTree()
         {
             proceduralTree.Progress = secondProceduralTree.Progress;
+            if (gameView.Terrarium.Tree != null)
+            {
+                // TODO: improve logic
+                gameView.Terrarium.Tree.Progress = proceduralTree.Progress;
+            }
         }
     }
 }

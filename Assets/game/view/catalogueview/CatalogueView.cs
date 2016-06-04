@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.game.model;
+using Assets.Scripts.catalogueview;
+using Assets.Scripts.GameDB;
+using Assets.Scripts.GameDB.DataModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Wasabimole.ProceduralTree;
 using Random = UnityEngine.Random;
 
@@ -52,25 +56,49 @@ namespace Assets.game.view.catalogueview
                     GameObject treePotGameObject = (GameObject)Instantiate(model.TreePot, Vector3.zero, Quaternion.identity);
                     treePotGameObject.transform.localPosition = pos;
                     treePotGameObject.transform.SetParent(model.TreesContainer.transform);
+                    SaveSlotController saveSlotController = treePotGameObject.AddComponent<SaveSlotController>();
+                    saveSlotController.SlotId = int.Parse(String.Format("{0}{1}", x, y));
 
-                    GameObject treeGameObject = new GameObject(String.Format("Tree ({0}, {1})", x, y));
-                    treeGameObject.transform.SetParent(treePotGameObject.transform.FindChild("TreeContainer"));
-                    treeGameObject.transform.localPosition = Vector3.zero;
-                    treeGameObject.transform.localScale = Vector3.one * 0.3f;
-                    treeGameObject.AddComponent<ProceduralTree>();
-                    treeGameObject.GetComponent<Renderer>().material = model.TreeMaterial;
+                    if (DBHelper.DoesTerrariumExist(saveSlotController.SlotId))
+                    {
+                        GameObject treeGameObject = new GameObject(String.Format("Tree ({0}, {1})", x, y));
+                        treeGameObject.transform.SetParent(treePotGameObject.transform.FindChild("TreeContainer"));
+                        treeGameObject.transform.localPosition = Vector3.zero;
+                        treeGameObject.transform.localScale = Vector3.one * 0.3f;
+                        ProceduralTree tree = treeGameObject.AddComponent<ProceduralTree>();
+                        treeGameObject.GetComponent<Renderer>().material = model.TreeMaterial;
 
-                    ProceduralTree tree = treeGameObject.GetComponent<ProceduralTree>();
+                        tree.Seed = Random.Range(0, 6000);
+                        tree.BranchRoundness = treeProperties.BranchRoundness;
+                        tree.MaxNumVertices = treeProperties.MaxNumVertices;
+                        tree.NumberOfSides = treeProperties.NumberOfSides;
+                        tree.Progress = Random.Range(0.7f, 1f);
 
-                    tree.Seed = Random.Range(0, 6000);
-                    tree.BranchRoundness = treeProperties.BranchRoundness;
-                    tree.MaxNumVertices = treeProperties.MaxNumVertices;
-                    tree.NumberOfSides = treeProperties.NumberOfSides;
-                    tree.Progress = Random.Range(0.7f, 1f);
+                        // Terrarium exists within this save slot
 
-                    trees[x][y] = tree;
+                        Terrarium terrarium = DBHelper.GetTerrarium(saveSlotController.SlotId);
+
+                        Scripts.GameDB.DataModel.Tree savedTree = terrarium.Tree;
+
+                        tree.Seed = savedTree.Seed;
+                        tree.Progress = savedTree.Progress;
+                        tree.BaseRadius = savedTree.BaseRadius;
+                        tree.BranchProbability = savedTree.BranchProbability;
+                        tree.MinimumRadius = savedTree.MinimumRadius;
+                        tree.RadiusStep = savedTree.RadiusStep;
+                        tree.SegmentLength = savedTree.SegmentLength;
+                        tree.Twisting = savedTree.Twisting;
+
+                        trees[x][y] = tree;
+                    }
                 }
             }
+        }
+
+        public void OpenTerrarium(int slotId)
+        {
+            GlobalModel.TerrariumId = slotId;
+            SceneManager.LoadScene("OverviewScene");
         }
     }
 }

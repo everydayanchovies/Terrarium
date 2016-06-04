@@ -80,12 +80,16 @@
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\BloomHelper.cs" />
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\BloomPro.cs" />
     <Compile Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Scripts\RenderTextureManager.cs" />
+    <Compile Include="Assets\game\model\GlobalModel.cs" />
+    <Compile Include="Assets\game\notifications\CatalogueViewNotifications.cs" />
     <Compile Include="Assets\Scripts\BattleTransitions\SimpleBlit.cs" />
+    <Compile Include="Assets\Scripts\catalogueview\SaveSlotController.cs" />
     <Compile Include="Assets\Scripts\GameDB\DBHelper.cs" />
     <Compile Include="Assets\Scripts\GameDB\DataModel\Debris.cs" />
     <Compile Include="Assets\Scripts\GameDB\DataModel\Terrarium.cs" />
     <Compile Include="Assets\Scripts\GameDB\DataModel\Tree.cs" />
     <Compile Include="Assets\Scripts\ProceduralTree\ProceduralTree.cs" />
+    <Compile Include="Assets\Scripts\ProceduralTree\TreeGenerator.cs" />
     <Compile Include="Assets\Scripts\Serializer.cs" />
     <Compile Include="Assets\Scripts\SpinLogic.cs" />
     <Compile Include="Assets\Scripts\TimeShiftStone\Dragger.cs" />

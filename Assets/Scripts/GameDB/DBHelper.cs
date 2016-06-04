@@ -24,6 +24,8 @@ namespace Assets.Scripts.GameDB
             {
                 Serializer.Save<Terrarium>(TERRARIUM_KEY + id, terrarium);
 
+                Debug.Log("Terrarium saved!");
+
                 return true;
             }
             catch (Exception e)
@@ -35,7 +37,7 @@ namespace Assets.Scripts.GameDB
 
         public static bool DoesTerrariumExist(int id)
         {
-            return GetTerrarium(id) == null;
+            return GetTerrarium(id) != null;
         }
     }
 }

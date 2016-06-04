@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Scripts.GameDB.DataModel;
+using Assets.Scripts.ProceduralTree;
 using UnityEngine;
 using Object = System.Object;
+using Random = UnityEngine.Random;
 using Tree = UnityEngine.Tree;
 
 namespace Assets.Scripts.GameDB.DataModel
@@ -19,7 +21,23 @@ namespace Assets.Scripts.GameDB.DataModel
             SkyColor = skyColor;
         }
 
-        public Tree Tree { get; set; }
+        private Tree _tree;
+
+        public Tree Tree
+        {
+            get
+            {
+                if (_tree == null)
+                {
+                    // Terrarium doesn't yet have a tree
+                    // Create a new bonsai tree
+                    _tree = TreeGenerator.GetBonsaiTree();
+                }
+                return _tree;
+            }
+            set { _tree = value; }
+        }
+
         public int GroundColor { get; set; }
         public int SkyColor { get; set; }
         public List<Debris> DebrisList { get; set; }

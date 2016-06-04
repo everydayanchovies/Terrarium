@@ -18,7 +18,7 @@ namespace Assets.game.controller
 
                 case GameNotification.TerrariumLoaded:
                     Terrarium terrarium = (Terrarium)p_data[0];
-                    Debug.Log("Terrarium loaded! Tree seed: " + terrarium.Tree.Seed);
+                    //Debug.Log("Terrarium loaded! Tree seed: " + terrarium.Tree.Seed);
                     break;
             }
         }

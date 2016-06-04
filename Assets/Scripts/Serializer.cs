@@ -12,6 +12,8 @@ namespace Assets.Scripts
     {
         public static T Load<T>(string filename) where T : class
         {
+            filename = "SaveData/" + filename;
+
             if (File.Exists(filename))
             {
                 try
@@ -27,11 +29,20 @@ namespace Assets.Scripts
                     Debug.Log(e.Message);
                 }
             }
+            else
+            {
+                Debug.LogWarning("Terrarium not found on disk.");
+            }
             return default(T);
         }
 
         public static void Save<T>(string filename, T data) where T : class
         {
+            if (!Directory.Exists("SaveData/"))
+            {
+                var folder = Directory.CreateDirectory("SaveData/");
+            }
+
             filename = "SaveData/" + filename;
             using (Stream stream = File.OpenWrite(filename))
             {

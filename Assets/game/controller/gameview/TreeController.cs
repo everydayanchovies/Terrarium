@@ -35,6 +35,8 @@ public class TreeController : TerrariumController
 
                 treeView.proceduralTree.SetValues(terrarium.Tree);
                 treeView.secondProceduralTree.SetValues(terrarium.Tree);
+
+                treeView.proceduralTree.enabled = true;
                 break;
         }
     }
@@ -66,7 +68,7 @@ public class TreeController : TerrariumController
 
         if (isRematerializingTree)
         {
-            return false;
+            yield break;
         }
 
         isRematerializingTree = true;

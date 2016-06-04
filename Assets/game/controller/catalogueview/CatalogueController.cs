@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.game.notification;
+using Assets.game.view.catalogueview;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Assets.game.controller.catalogueview
@@ -12,9 +15,18 @@ namespace Assets.game.controller.catalogueview
         {
             switch (p_event_path)
             {
-                case TreeNotification.TreeGrewSignificantly:
+                case CatalogueViewNotifications.SaveSlotChosen:
+                    int slotId = (int) p_data[0];
+                    LoadTerrarium(slotId);
                     break;
             }
+        }
+
+        private void LoadTerrarium(int slotId)
+        {
+            // TODO: screen transitions
+
+            app.GetView<CatalogueView>().OpenTerrarium(slotId);
         }
     }
 }
