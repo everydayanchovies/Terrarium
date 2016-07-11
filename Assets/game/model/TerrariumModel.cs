@@ -5,4 +5,5 @@ using System.Collections;
 public class TerrariumModel : TerrariumElement
 {
    public int winCondition;
+	public int energy;
 }

@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // Controls the app workflow.
 public class TerrariumController : TerrariumElement, Controller
 {
+	public Text energyText;
+
 	void Start ()
 	{
 		app.RegisterController (this);
+
+		app.model.energy = 300;
+
+		app.Notify(TerrariumNotification.EnergyChanged, this);
 	}
 
 	// Handles the ball hit event
@@ -20,6 +27,12 @@ public class TerrariumController : TerrariumElement, Controller
          
 		case TerrariumNotification.LeftKeyPressed:
 			Debug.Log ("Left key");
+			break;
+
+		case TerrariumNotification.EnergyChanged:
+			int energy = app.model.energy;
+
+			energyText.text = "Energy: " + energy;
 			break;
 		}	
 	}

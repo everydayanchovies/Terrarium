@@ -57,12 +57,9 @@
      <None Include="Assets\AssetStore\Dreamscapes\info.txt" />
      <None Include="Assets\AssetStore\Dreamscapes\update.txt" />
      <None Include="Assets\RAIN\Editor\Shaders\VisualSensorLineShader.shader" />
-     <None Include="Assets\Resources\SSGIShader.shader" />
-     <None Include="Assets\Resources\frag_gi.cginc" />
      <None Include="Assets\RAIN\Editor\Shaders\NavMeshContourShader.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\BloomPro.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\WaypointShader.shader" />
-     <None Include="Assets\Resources\ScreenTransitionShader.shader" />
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\shaders\Glass Reflective.shader" />
      <None Include="Assets\AssetStore\GoldenZebra\Image Effects\BloomPro\Shaders\Resources\SeparableBlur.cginc" />
@@ -98,6 +95,18 @@
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
+ <Reference Include="RAINMetaform">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAINMetaform.dll</HintPath>
+ </Reference>
+ <Reference Include="RAIN">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAIN.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINEditor">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINMetaformEditor">
+ <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINMetaformEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/opt/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -121,18 +130,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/opt/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="RAINMetaformEditor">
- <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINMetaformEditor.dll</HintPath>
- </Reference>
- <Reference Include="RAINMetaform">
- <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAINMetaform.dll</HintPath>
- </Reference>
- <Reference Include="RAIN">
- <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/RAIN.dll</HintPath>
- </Reference>
- <Reference Include="RAINEditor">
- <HintPath>/home/max/Documents/GIT/Unity/Terrarium/Assets/RAIN/Editor/RAINEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

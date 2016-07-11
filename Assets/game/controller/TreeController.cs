@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Assets.game.view.overview;
 
 // Controls the app workflow.
@@ -23,9 +24,16 @@ public class TreeController : TerrariumElement, Controller
 			//StartCoroutine (RematerializeTree ());
 			break;
 		case TreeNotification.TreeHasEvolved:
-			Debug.LogWarning ("Tree has evolved!");
+			Debug.Log ("Tree has evolved!");
 			//StartCoroutine (FlashScreen ());
 			//StartCoroutine (RematerializeTree ());
+			break;
+		case TreeNotification.TargetItemClicked:
+			int index = (int)p_data [0];
+			ModularTree.ModularTree tree = GameObject.FindObjectOfType<ModularTree.ModularTree> ();
+			Debug.Log ("Target item clicked! (" + index + ")");
+
+			tree.ToggleBranch (index);
 			break;
 		}
 	}

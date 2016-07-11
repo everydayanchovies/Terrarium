@@ -1,25 +1,13 @@
-﻿<Properties>
+﻿<Properties StartupItem="Assembly-Boo-Editor.booproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/game/controller/TreeController.cs">
     <Files>
-      <File FileName="Assets/AssetStore/Wasabimole/ProceduralTree/ProceduralTree.cs" Line="207" Column="4" />
-      <File FileName="Assets/game/controller/TerrariumController.cs" Line="19" Column="10" />
-      <File FileName="Assets/game/controller/TreeController.cs" Line="94" Column="42" />
-      <File FileName="Assets/game/view/TreeView.cs" Line="93" Column="6" />
-      <File FileName="Assets/game/notifications/TreeNotifications.cs" Line="8" Column="52" />
-      <File FileName="Assets/game/TerrariumApplication.cs" Line="1" Column="1" />
-      <File FileName="Assets/game/notifications/Controller.cs" Line="1" Column="1" />
-      <File FileName="Assets/game/view/TerrariumView.cs" Line="6" Column="2" />
-      <File FileName="Assets/game/view/GameView/GameView.cs" Line="1" Column="1" />
-      <File FileName="Assets/game/model/TerrariumModel.cs" Line="1" Column="1" />
-      <File FileName="Assets/game/view/SpinLogic.cs" Line="58" Column="28" />
-      <File FileName="Assets/Resources/BattleTransitionShader.shader" Line="19" Column="5" />
-      <File FileName="Assets/Resources/TreeShader.shader" Line="72" Column="56" />
-      <File FileName="Assets/game/view/ProgressView.cs" Line="4" Column="26" />
-      <File FileName="Assets/game/view/LSystemGenerator.cs" Line="109" Column="5" />
-      <File FileName="Assets/Resources/SSGIShader.shader" Line="5" Column="7" />
-      <File FileName="Assets/Resources/frag_gi.cginc" Line="1" Column="58" />
-      <File FileName="Assets/SSGIEffect.cs" Line="9" Column="11" />
+      <File FileName="Assets/Scripts/ModularTree.cs" Line="418" Column="4" />
+      <File FileName="Assets/AssetStore/Wasabimole/ProceduralTree/ProceduralTree.cs" Line="299" Column="85" />
+      <File FileName="Assets/game/view/overview/TargetItemView.cs" Line="20" Column="61" />
+      <File FileName="Assets/game/controller/TreeController.cs" Line="35" Column="36" />
+      <File FileName="Assets/game/notifications/TreeNotifications.cs" Line="9" Column="39" />
+      <File FileName="Assets/game/view/overview/TreeView.cs" Line="95" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

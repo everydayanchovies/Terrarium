@@ -52,22 +52,22 @@ namespace Assets.game.view.overview
         // Update is called once per frame
         void Update()
         {
-            proceduralTree.Twisting = Mathf.Lerp(twist - TwistAmount, twist + TwistAmount,
-  Mathf.SmoothStep(0f, 1f,
-   Mathf.PingPong(Time.time / 10, 1f)
- ));
-
-            if (Time.time >= nextTime)
-            {
-                if (!treeController.isRematerializingTree)
-                {
-                    GrowSecondTree(5);
-
-                    StartCoroutine(UpdateTreeWithDelay(1f));
-
-                    nextTime += interval;
-                }
-            }
+//            proceduralTree.Twisting = Mathf.Lerp(twist - TwistAmount, twist + TwistAmount,
+//  Mathf.SmoothStep(0f, 1f,
+//   Mathf.PingPong(Time.time / 10, 1f)
+// ));
+//
+//            if (Time.time >= nextTime)
+//            {
+//                if (!treeController.isRematerializingTree)
+//                {
+//                    GrowSecondTree(5);
+//
+//                    StartCoroutine(UpdateTreeWithDelay(1f));
+//
+//                    nextTime += interval;
+//                }
+//            }
         }
 
         public int SignificantNumBranches;

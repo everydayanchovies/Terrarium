@@ -6,4 +6,5 @@ class TreeNotification
 {
 	public const string TreeGrewSignificantly = "tree.grewsignificantly";
 	public const string TreeHasEvolved = "tree.evolved";
+	public const string TargetItemClicked = "tree.target.clicked";
 }
