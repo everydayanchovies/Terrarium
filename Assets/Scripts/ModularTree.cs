@@ -16,6 +16,39 @@ namespace ModularTree
 		public int index{ get; set; }
 
 		public bool branch{ get; set; }
+
+		public bool selected{ get; set; }
+	}
+
+	public class BranchItem
+	{
+		public enum BranchType
+		{
+			Thick,
+			Thin,
+			Wet,
+			Dry,
+			FruitBearing
+		}
+
+		public int id{ get; set; }
+
+		private List<BranchType> _properties;
+
+		public List<BranchType> properties {
+			get {
+				if (_properties == null) {
+					_properties = new List<BranchType> ();
+				} 
+		
+				return _properties;
+			}
+			set { 
+				_properties = value;
+			}
+		}
+
+		public Vector3 position{ get; set; }
 	}
 
 	[ExecuteInEditMode]
@@ -28,6 +61,7 @@ namespace ModularTree
 		// ---------------------------------------------------------------------------------------------------------------------------
 
 
+		[Header ("Tree")]
 		public int Seed;
 		// Random seed on which the generation is based
 		[Range (1024, 65000)]
@@ -58,6 +92,15 @@ namespace ModularTree
 		private float Progress = 1f;
 
 		public bool RenderTree = true;
+
+
+		[Header ("Targets")]
+		public bool ShowTargets = true;
+		public bool AdaptiveTargetSize = false;
+		[Range (0.1f, 5.0f)]
+		public float MinTargetSize = 0.5f;
+		[Range (0.1f, 5.0f)]
+		public float MaxTargetSize = 3.0f;
 
 		// ---------------------------------------------------------------------------------------------------------------------------
 
@@ -140,6 +183,7 @@ namespace ModularTree
 			}
 
 			targets = new List<TargetItem> ();
+			branches = new List<BranchItem> ();
 
 			GameObject[] targetHolders = GameObject.FindGameObjectsWithTag ("targetsHolder");
 			if (targetHolders != null && targetHolders.Length > 0) {
@@ -152,6 +196,8 @@ namespace ModularTree
 			targetsHolder.name = "Targets holder";
 			targetsHolder.tag = "targetsHolder";
 			targetsHolder.transform.SetParent (transform.parent);
+
+			LargestVertIndex = 0;
 
 			SetTreeRingShape (); // Init shape array for current number of sides
 
@@ -167,6 +213,10 @@ namespace ModularTree
 			transform.localRotation = originalRotation; // Restore original object rotation
 
 			SetTreeMesh (); // Create/Update MeshFilter's mesh
+
+			RefreshTargets ();
+
+//			RefreshBranches ();
 		}
 
 		// ---------------------------------------------------------------------------------------------------------------------------
@@ -206,6 +256,9 @@ namespace ModularTree
 		private List<TargetItem> targets;
 		public TargetItem[] Targets;
 		private GameObject targetsHolder;
+		private int LargestVertIndex;
+		private List<BranchItem> branches;
+		public BranchItem[] Branches;
 
 		void Branch (Quaternion quaternion, Vector3 position, int lastRingVertexIndex, float radius, float texCoordV)
 		{
@@ -271,7 +324,7 @@ namespace ModularTree
 			if (lastRingVertexIndex % 5 == 0) {
 				GameObject targetGO = (GameObject)Instantiate (targetPrefab, Vector3.zero, quaternion);
 				targetGO.transform.SetParent (targetsHolder.transform);
-				targetGO.transform.position = position + transform.position;
+				targetGO.transform.position += position;
 				TargetItemView targetItemView = targetGO.GetComponent<TargetItemView> ();
 				targetItemView.index = lastRingVertexIndex;
 
@@ -280,6 +333,10 @@ namespace ModularTree
 				targetItem.index = lastRingVertexIndex;
 				targetItem.branch = false;
 				targets.Add (targetItem);
+
+				if (lastRingVertexIndex > LargestVertIndex) {
+					LargestVertIndex = lastRingVertexIndex;
+				}
 			}
 
 			// Do we branch?
@@ -302,8 +359,16 @@ namespace ModularTree
 
 			BranchCount++;
 
+			var branchItem = new BranchItem ();
+			branchItem.id = lastRingVertexIndex;
+
+			branchItem.position = position;
+			branchItem.properties.Add (BranchItem.BranchType.FruitBearing);
+			branches.Add (branchItem);
+
 			// Yes, add a new branch
 			transform.rotation = quaternion;
+			Random.seed = lastRingVertexIndex;
 			x = Random.value * 70f - 35f;
 			x += x > 0 ? 10f : -10f;
 			z = Random.value * 70f - 35f;
@@ -355,6 +420,7 @@ namespace ModularTree
 		public void Start ()
 		{
 			GenerateTree ();
+			Seed = Random.Range (0, 1024);
 		}
 
 		// ---------------------------------------------------------------------------------------------------------------------------
@@ -433,9 +499,71 @@ namespace ModularTree
 					}
 				}
 			}
+
+			RefreshTargets ();
 		}
 
-		public Color targetColourSelected;
+		public void RefreshTargets ()
+		{
+			foreach (TargetItem targetItem in targets) {
+				foreach (Transform tar1 in targetsHolder.transform) {
+					if (tar1.position == targetItem.gameObject.transform.position) {
+						// We have a match
+
+						// Avoid weird errors during editing
+						if (Application.isPlaying) {
+							if (targetItem.selected) {
+								tar1.localScale = 1.3f * (Vector3.one * CalculateTargetScale (targetItem.index));
+
+								if (targetItem.branch) {
+									// Remove branch
+									tar1.gameObject.GetComponent<Renderer> ().material.color = targetColourSelectedRemove;
+								} else {
+									// Add branch
+									tar1.gameObject.GetComponent<Renderer> ().material.color = targetColourSelectedAdd;
+								}
+							} else {
+								tar1.localScale = 0.7f * (Vector3.one * CalculateTargetScale (targetItem.index));
+								tar1.gameObject.GetComponent<Renderer> ().material.color = targetColourIdle;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private GameObject branchTargetsContainer;
+		private List<GameObject> branchTargets;
+
+		public void RefreshBranches ()
+		{
+			GameObject[] targetHolders = GameObject.FindGameObjectsWithTag ("branchTargetsContainer");
+			if (targetHolders != null && targetHolders.Length > 0) {
+				foreach (var targetHolder in targetHolders) {
+					GameObject.DestroyImmediate (targetHolder);
+				}
+			}
+
+			branchTargetsContainer = new GameObject ();
+			branchTargetsContainer.name = "Branch targets container";
+			branchTargetsContainer.tag = "branchTargetsContainer";
+			branchTargetsContainer.transform.parent = transform.parent;
+
+			branchTargets = new List<GameObject> ();
+
+			Branches = branches.ToArray ();
+
+			foreach (var branch in Branches) {
+				var cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+				cube.transform.position = branch.position;
+//				cube.transform.localScale = Vector3.one * 2f;
+				cube.transform.SetParent (branchTargetsContainer.transform);
+				branchTargets.Add (cube);
+			}
+		}
+
+		public Color targetColourSelectedRemove;
+		public Color targetColourSelectedAdd;
 		public Color targetColourIdle;
 
 		public void ToggleBranch (int index)
@@ -449,30 +577,30 @@ namespace ModularTree
 					
 					int cost = (int)((1f / 100f / ((float)index / MaxNumVertices)) * 5f);
 
-					if (app.model.energy - cost < 0) {
-						return;
-					}
+					if (app.model.energy - cost > 0) {
+						
+						if (target.selected) {
+							// Actually branch
+							target.branch = !target.branch;
 
-					if (target.gameObject.transform.localScale.x > 1) {
-						// Actually branch
-						target.branch = !target.branch;
+							app.model.energy -= cost;
 
-						app.model.energy -= cost;
+							app.Notify (TerrariumNotification.EnergyChanged, this);
 
-						app.Notify(TerrariumNotification.EnergyChanged, this);
-					} else {
-						// Verify branch
-						foreach (Transform tar1 in targetsHolder.transform) {
-							if (tar1.position == target.gameObject.transform.position) {
-								tar1.localScale = 1.3f * Vector3.one;
-								tar1.gameObject.GetComponent<Renderer> ().material.color = targetColourSelected;
-							} else {
-								tar1.localScale = 0.7f * Vector3.one;
-								tar1.gameObject.GetComponent<Renderer> ().material.color = targetColourIdle;
+							foreach (TargetItem tar1 in targets) {
+								tar1.selected = false;
 							}
-						}
+						} else {
+							foreach (TargetItem tar1 in targets) {
+								tar1.selected = false;
+							}
 
-						return;
+							target.selected = true;
+
+							RefreshTargets ();
+
+							return;
+						}
 					}
 				}
 			}
@@ -480,6 +608,25 @@ namespace ModularTree
 			GenerateTree ();
 
 			UpdateTargets ();
+		}
+
+		private float CalculateTargetScale (int index)
+		{
+			if (!AdaptiveTargetSize) {
+				return MaxTargetSize;
+			}
+
+			float correctedScaleRange = MaxTargetSize - MinTargetSize;
+			float scale = (float)index / (float)LargestVertIndex;
+			float invertedScale = 1f - scale;
+			float targetScale = invertedScale * correctedScaleRange;
+
+			if (targetScale < MinTargetSize)
+				return MinTargetSize;
+			if (targetScale > MaxTargetSize)
+				return MaxTargetSize;
+			
+			return targetScale;
 		}
 	}
 }

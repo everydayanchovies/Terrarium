@@ -1,4 +1,6 @@
-﻿Shader "TreeShader"
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "TreeShader"
 {
 	Properties
 	{
@@ -64,7 +66,7 @@
 					#endif
 
 
-					float4x4 modelMatrixInverse = _World2Object;
+					float4x4 modelMatrixInverse = unity_WorldToObject;
 					//float3 normalDirection = normalize(float3(mul(float4(v.normal, 0.0), modelMatrixInverse)));
 					float3 normalDirection = normalize(mul(float4(v.normal, 0.0), modelMatrixInverse).xyz);
 					//float3 lightDirection = normalize(float3(_WorldSpaceLightPos0));

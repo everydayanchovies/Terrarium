@@ -7,6 +7,8 @@ Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-CShar
 EndProject
 Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-Boo-Editor.booproj", "{B52E1AD0-B895-35C6-6388-FD23E1768A19}"
 EndProject
+Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-UnityScript.unityproj", "{4AE58DB6-E0DA-870B-4F09-CFA41AC75131}"
+EndProject
 Project("{65773683-890C-54A3-E3EC-306F701A4545}") = "Terrarium", "Assembly-UnityScript-Editor.unityproj", "{D7CD1763-F667-75DF-12D0-7D1B4B8482CD}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{B52E1AD0-B895-35C6-6388-FD23E1768A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B52E1AD0-B895-35C6-6388-FD23E1768A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B52E1AD0-B895-35C6-6388-FD23E1768A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE58DB6-E0DA-870B-4F09-CFA41AC75131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE58DB6-E0DA-870B-4F09-CFA41AC75131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE58DB6-E0DA-870B-4F09-CFA41AC75131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE58DB6-E0DA-870B-4F09-CFA41AC75131}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7CD1763-F667-75DF-12D0-7D1B4B8482CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7CD1763-F667-75DF-12D0-7D1B4B8482CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7CD1763-F667-75DF-12D0-7D1B4B8482CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
